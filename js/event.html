@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event.html</title>
+  </head>
+  <body>
+    <button id="btnSave">클릭</button>
+    이름<input id="txtName" />
+    <script>
+      btnSave.addEventListener("click", function () {
+        console.log("클릭됨")
+        // 이름 텍스트 필드에 마우스 오버하면 배경색을 노란색으로 변경
+        // 마우스 아웃하면 흰색으로 변경
+        // change되면 "변경됨" 콘솔창에 출력
+      })
+      txtName.addEventListener("mouseover", function () {
+        document.getElementById("txtName").style.backgroundColor = "yellow"
+      })
+      txtName.addEventListener("mouseout", function () {
+        document.getElementById("txtName").style.backgroundColor = "white"
+      })
+      txtName.addEventListener("change", function () {
+        console.log("asdf")
+      })
+    </script>
+  </body>
+</html>
