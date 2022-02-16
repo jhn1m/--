@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>20220215.html</title>
+  </head>
+  <body>
+    <div id="container" style="width: 500px; height: 500px; margin: auto">
+      <h1>Number guessing game</h1>
+      <p>
+        We have selected a random number between 1 and 100. See if you can guess
+        it in 10 turns or fewer. We'll tell you if your guess was too high or
+        too low..
+      </p>
+      Enter a guess : <input type="text" id="input_guess" />
+      <button id="submit_guess">Submit guess</button>
+      <p id="Previous_guesses"></p>
+      <p id="result"></p>
+      <p id="Previous_result"></p>
+    </div>
+
+    <script>
+      var randomNumber = Math.floor(Math.random() * 100) + 1
+      var click_cnt = 0
+      var arr = []
+
+      function start() {
+        guess_num = document.getElementById("input_guess").value
+        if (guess_num == "") {
+          guess_num = 0
+        }
+        click_cnt++
+        arr.push(guess_num)
+        document.getElementById("Previous_guesses").innerHTML =
+          "Previous guesses :" + arr
+        if (click_cnt != 10) {
+          if (guess_num != 0 && guess_num > 0 && guess_num < 100) {
+            if (guess_num > randomNumber) {
+              high()
+            } else if (guess_num < randomNumber) {
+              low()
+            } else if (guess_num == randomNumber) {
+              equal()
+            }
+          } else if (guess_num == 0) {
+            low()
+          }
+        } else {
+          gameover()
+        }
+      }
+
+      function reset() {
+        randomNumber = Math.floor(Math.random() * 100) + 1
+        click_cnt = 0
+        arr.length = 0
+        document.getElementById("input_guess").value = ""
+        document.getElementById("new_btn").remove()
+        document.getElementById("Previous_guesses").innerHTML = ""
+        document.getElementById("Previous_result").innerHTML = ""
+        document.getElementById("result").innerHTML = ""
+        document.getElementById("submit_guess").disabled = false
+      }
+
+      function low() {
+        document.getElementById("Previous_result").innerHTML =
+          "Last guess was too low!"
+        document.getElementById("result").innerHTML = "Wrong!"
+        document.getElementById("result").style.backgroundColor = "red"
+        document.getElementById("result").style.color = "white"
+      }
+
+      function high() {
+        document.getElementById("Previous_result").innerHTML =
+          "Last guess was too high!"
+        document.getElementById("result").innerHTML = "Wrong!"
+        document.getElementById("result").style.backgroundColor = "red"
+        document.getElementById("result").style.color = "white"
+      }
+
+      function first_equal() {
+        document.getElementById("Previous_result").innerHTML = ""
+        document.getElementById("result").innerHTML =
+          "Congratulations! You got it right!"
+        document.getElementById("result").style.backgroundColor = "green"
+        document.getElementById("result").style.color = "white"
+        btn_new()
+      }
+
+      function equal() {
+        document.getElementById("Previous_result").innerHTML = ""
+        document.getElementById("result").innerHTML = "Congratulations!"
+        document.getElementById("result").style.backgroundColor = "green"
+        document.getElementById("result").style.color = "white"
+        btn_new()
+      }
+
+      function gameover() {
+        document.getElementById("result").innerHTML = "!!!GAME OVER!!!"
+        document.getElementById("result").style.backgroundColor = "red"
+        document.getElementById("submit_guess").disabled = true
+        document.getElementById("Previous_result").disabled = true
+        btn_new()
+      }
+
+      function btn_new() {
+        arr.length = 0
+        var btn = document.createElement("button")
+        btn.setAttribute("id", "new_btn")
+        btn.innerHTML = "Start new game"
+        document.getElementById("container").appendChild(btn)
+        new_btn.addEventListener("click", function () {
+          reset()
+        })
+      }
+
+      submit_guess.addEventListener("click", function () {
+        start()
+        input_guess.value = ""
+        input_guess.focus()
+      })
+    </script>
+  </body>
+</html>
