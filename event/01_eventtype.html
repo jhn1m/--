@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body onload="window.open('','','width=200, height=200'); consoloe.log('팝업로드')">
+    <input id="txtName">
+    <button type="button" id="btn">버튼</button>
+    <script>
+        btn.addEventListener("click", function(){ alert("클릭됨!") })
+        btn.addEventListener("click", function(){ console.log("클릭됨!") })
+
+        txtName.addEventListener("mouseover", function(){ txtName.style.backgroundColor = 'yellow'; })
+        txtName.addEventListener("mouseout", function(){ txtName.style.backgroundColor = 'white'; })
+        txtName.addEventListener("change", function(){ console.log("변경됨!") })
+
+        window.addEventListener("load", function(){ })
+    </script>
+</body>
+</html>
