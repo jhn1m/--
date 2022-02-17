@@ -3,6 +3,7 @@
 document.getElementsByClassName("word")[0] 활용
 document.getElementsByClassName("word")[0].nextElementSibling.innerHTML
 리스트를 클릭 할 시 다음 노드의 span 태그의 값을 가져오기
+event.target 사용
 -->
 
 <!DOCTYPE html>
@@ -28,7 +29,13 @@ document.getElementsByClassName("word")[0].nextElementSibling.innerHTML
 
     <script>
       var plist = document.getElementsByClassName("word")
+
       for (temp of plist) {
+        temp.addEventListener("click", clickEvent)
+      }
+
+      function clickEvent() {
+        console.log(event.target.nextElementSibling.innerHTML)
       }
     </script>
   </body>

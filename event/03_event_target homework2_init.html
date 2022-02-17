@@ -3,6 +3,7 @@
 document.getElementsByClassName("word")[0].parentElement
 document.getElementsByTagName("p")[0]
 document.getElementsByTagName("div")[0].getAttribute("data-price")
+
 읽어서 콘솔창에 출력
 -->
 
@@ -23,10 +24,13 @@ document.getElementsByTagName("div")[0].getAttribute("data-price")
     <div data-price="2000"><p class="word">very</p></div></div>
 
     <script>
-        var plist = document.getElementsByClassName("word");
-        for (temp of plist) {
- 
-        }
+            var plist = document.getElementsByClassName("word");
+            for (temp of plist) {
+                temp.addEventListener("click", function () {
+                    console.log(event.target.parentElement.getAttribute("data-price"));
+                })
+            }
+
     </script>
 </body>
 </html>
