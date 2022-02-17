@@ -6,22 +6,40 @@
   </head>
   <body>
     <input id="txtWord" /><button type="button" id="btnAdd">추가</button>
-    <p class="word">list</p>
-    <p class="word">nice</p>
-    <p class="word">good</p>
-    <p class="word">very</p>
+    <p><span class="word">list</span><span class="close">X</span></p>
 
     <script>
       btnAdd.addEventListener("click", function () {
         //태그생성하고 추가
+        // 순서대로 span 태그 생성 후 클래스 붙여주고
+        // p 태그에 추가해준 뒤 p 태그를 body에 붙임
         const p = document.createElement("p")
-        p.classList.add("word")
-        p.innerHTML = txtWord.value
+        // const span = document.createElement("span")
+        // span.classList.add("word")
+        // span.innerHTML = txtWord.value
+        // p.append(span)
+
+        // const spanclose = document.createElement("span")
+        // spanclose.classList.add("close")
+        // spanclose.innerHTML = "X"
+        // p.append(spanclose)
+
+        // 편한 방법
+        p.innerHTML = `<span class="word">${txtWord.value}</span><span class="close">X</span>`
+
         document.body.append(p)
       })
 
       // 그룹 이벤트
+      // if문으로 class name이 맞는 것들에게 메서드 구현
+      // close가 있는 X를 눌렀을 때 부모노드인 parentNode를 찾아서
+      // remove()로 자체 p 태그를 삭제해버림
       document.body.addEventListener("click", function () {
+        if (event.target.classList.contains("word")) {
+          console.log(event.target.innerHTML)
+        } else if (event.target.classList.contains("close")) {
+          event.target.parentNode.remove()
+        }
         console.log(event.target.innerHTML)
       })
     </script>
