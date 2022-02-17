@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input id="txtWord"><button type="button" id="btnAdd">추가</button>
+    <p class="word">list</p>
+    <p class="word">nice</p>
+    <p class="word">good</p>
+    <p class="word">very</p>
+
+    <script>
+        btnAdd.addEventListener("click", function(){
+            const p = document.createElement("p");
+            p.classList.add("word")
+            p.innerHTML = txtWord.value;
+            document.body.append(p);
+        })
+
+        //이벤트 위임(그룹이벤트)
+        document.body.addEventListener("click", function(){
+            if(event.target.tagName == 'P') {
+            //if(event.target.className == "word") {
+            //if(event.target.classList.contains("word")) {
+                console.log(event.target.innerHTML);
+            }
+
+            console.log("this", this);
+            console.log("target", event.target);
+            console.log("currentTarget", event.currentTarget);
+        })
+    </script>
+</body>
+</html>

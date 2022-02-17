@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input id="txtWord"><button type="button" id="btnAdd">추가</button>
+    <p class="word">list</p>
+    <p class="word">nice</p>
+    <p class="word">good</p>
+    <p class="word">very</p>
+
+    <script>
+        var plist = document.getElementsByClassName("word");
+        for (temp of plist) {
+            temp.addEventListener("click", function(){
+                console.log(event.target.innerHTML);
+            })
+        }
+
+        btnAdd.addEventListener("click", function(){
+            //태그생성하고 추가
+            const p = document.createElement("p");
+            p.classList.add("word")
+            p.innerHTML = txtWord.value;
+            document.body.append(p);
+
+            //태그에 이벤트 지정
+            // p.addEventListener("click", function(){
+            //     console.log(event.target.innerHTML);
+            // });
+        })
+        
+    </script>
+</body>
+</html>

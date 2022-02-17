@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        span { display : none;}
+
+    </style>
+</head>
+<body>
+    <div data-price="2000"><p class="word">list</p></div>
+    <div data-price="2000"><p class="word">nice</p></div>
+    <div data-price="2000"><p class="word">good</p></div></div>
+    <div data-price="2000"><p class="word">very</p></div></div>
+
+    <script>
+        var plist = document.getElementsByClassName("word");
+        for (temp of plist) {
+            temp.addEventListener("click", function(){
+                console.log(event.target.parentElement.getAttribute("data-price"));
+            })
+        }
+    </script>
+</body>
+</html>
