@@ -8,14 +8,22 @@
   </head>
   <body>
     <h3>영화정보</h3>
-    <button id="btnboxOffice">박스오피스</button>
-    <div id="result"></div>
+    <input id="searchDt" /><button id="btnboxOffice">박스오피스</button>
+
+    <div id="result">
+      <div><span>코드</span><span class="movieCd">22202020</span></div>
+    </div>
+
+    <div class="actors"></div>
     <script>
       btnboxOffice.addEventListener("click", getBoxOffice)
 
+      // class = "moviceCd" 클릭
+
       function getBoxOffice() {
         let url =
-          "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20220217"
+          "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" +
+          searchDt
         fetch(url)
           .then((response) => response.json())
           .then((response) => {
@@ -23,7 +31,11 @@
             // 데이터타입의 이름을 그대로 갖고옴
             let list = response.boxOfficeResult.dailyBoxOfficeList
             for (let i = 0; i < list.length; i++) {
-              result.innerHTML += list[i].movieNm + "<br>" // 계속해서 추가를 하기 위해 += 사용
+              result.innerHTML +=
+                list[i].movieNm + " , " + list[i].movieCd + "<br>" // 계속해서 추가를 하기 위해 += 사용
+              //div 태그 생성
+              newdiv.innerHTML = `<span>${list[i].movieNm}</span><span class="movieCd">123456</span>`
+              result.appendd
             }
           })
       }
