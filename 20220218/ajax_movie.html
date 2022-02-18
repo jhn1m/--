@@ -8,10 +8,14 @@
   </head>
   <body>
     <h3>영화정보</h3>
-    <input id="searchDt" /><button id="btnboxOffice">박스오피스</button>
+    <input id="searchDt" placeholder="날짜를 입력하세요" /><button
+      id="btnboxOffice"
+    >
+      박스오피스
+    </button>
 
     <div id="result">
-      <div><span>코드</span><span class="movieCd">22202020</span></div>
+      <div><span></span><span class="movieCd"></span></div>
     </div>
 
     <div class="actors"></div>
@@ -23,7 +27,7 @@
       function getBoxOffice() {
         let url =
           "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" +
-          searchDt
+          searchDt.value
         fetch(url)
           .then((response) => response.json())
           .then((response) => {
