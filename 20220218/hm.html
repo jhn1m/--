@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h3>영화정보</h3>
+    <input id="searchDt" placeholder="날짜를 입력해주세요" /><button
+      id="btnboxOffice"
+    >
+      박스오피스검색
+    </button>
+    <div id="result">
+      <div><span></span>&nbsp<span class="movieCd"></span></div>
+    </div>
+    <div id="actors"></div>
+    <script>
+      btnboxOffice.addEventListener("click", getBoxOffice) //펑션 괄호X
+
+      function getBoxOffice() {
+        let url =
+          "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" +
+          `${searchDt.value}`
+        fetch(url) //결과 가져오기
+          .then((response) => response.json()) //json으로 파싱  , response는 전체 객체를 다 가르킴
+          .then((response) => {
+            console.log(response)
+            let list = response.boxOfficeResult.dailyBoxOfficeList
+            for (i = 0; i < list.length; i++) {
+              //div태그 생성
+              let newdiv = document.createElement("div")
+              newdiv.innerHTML += `<span >영화제목 : ${list[i].movieNm}<br> 영화코드 : </span><span class="movieCd">${list[i].movieCd}</span><br><br>`
+              document.getElementById("result").append(newdiv)
+            }
+          }) //결과 시작
+      }
+
+      // //class="movieCd" 클릭
+      document.getElementById("result").addEventListener("click", getActors)
+
+      function getActors() {
+        let url =
+          "https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" +
+          event.target.innerHTML
+        fetch(url)
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response)
+            let list2 = response.movieInfoResult.movieInfo.actors
+            for (i = 0; i < list2.length; i++) {
+              let div = document.createElement("div")
+              div.innerHTML = `<span>배우이름 : </span><span >${list2[i].peopleNm}</span><br>`
+              document.getElementById("actors").append(div)
+            }
+          })
+      }
+    </script>
+  </body>
+</html>

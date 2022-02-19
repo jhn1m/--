@@ -8,38 +8,55 @@
   </head>
   <body>
     <h3>영화정보</h3>
-    <input id="searchDt" placeholder="날짜를 입력하세요" /><button
+    <input id="movieDt" placeholder="movieDt를 입력하세요" /><button
       id="btnboxOffice"
     >
-      박스오피스
+      검색
     </button>
 
     <div id="result">
       <div><span></span><span class="movieCd"></span></div>
     </div>
 
-    <div class="actors"></div>
+    <div id="actors"></div>
     <script>
       btnboxOffice.addEventListener("click", getBoxOffice)
+      result.addEventListener("click", getActor)
 
-      // class = "moviceCd" 클릭
+      function checkClass() {
+        console.log()
+      }
+
+      // class = "movicCd" 클릭
 
       function getBoxOffice() {
         let url =
           "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=" +
-          searchDt.value
+          movieDt.value
+        fetch(url)
+          .then((response) => response.json())
+          .then((response) => {
+            // console.log(response) 데이터타입의 이름을 그대로 갖고옴
+            let list = response.boxOfficeResult.dailyBoxOfficeList
+            for (let i = 0; i < list.length; i++) {
+              result.innerHTML += `<span>${list[i].movieNm} | movieCd : <span class="movieCd">${list[i].movieCd}</span><br>` // 계속해서 추가를 하기 위해 += 사용
+            }
+          })
+      }
+
+      function getActor() {
+        console.log(event.target.innerHTML)
+        let url =
+          "http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=" +
+          event.target.innerHTML
         fetch(url)
           .then((response) => response.json())
           .then((response) => {
             console.log(response)
-            // 데이터타입의 이름을 그대로 갖고옴
-            let list = response.boxOfficeResult.dailyBoxOfficeList
+            let list = response.movieInfoResult.movieInfo.actors
+            actors.innerHTML = `출연진<br>`
             for (let i = 0; i < list.length; i++) {
-              result.innerHTML +=
-                list[i].movieNm + " , " + list[i].movieCd + "<br>" // 계속해서 추가를 하기 위해 += 사용
-              //div 태그 생성
-              newdiv.innerHTML = `<span>${list[i].movieNm}</span><span class="movieCd">123456</span>`
-              result.appendd
+              actors.innerHTML += `배우 : ${list[i].peopleNm}<br>`
             }
           })
       }
