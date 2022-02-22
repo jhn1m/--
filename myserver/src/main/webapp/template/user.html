@@ -51,21 +51,30 @@
 				</tr>
 			</thead>
 			
-			<tbody>
-				<tr>
-					<td class="text-center">user</td>
-					<td class="text-center">1111</td>
-					<td class="text-center">홍길동</td>
-					<td class="text-center">User</td>
-					<td class="text-center">
-						<button class="btnUpd">조회</button>
-						<button class="btnDel">삭제</button>
-					</td>
-				</tr>
-
+			<tbody id = "list">
+			
 			</tbody>
 		</table>
 	</div>
-
+<script>
+fetch("../userSelectAll")
+.then(res => res.json())
+.then(obj => {
+	for(user of obj){
+	let tr = document.createElement("tr");
+	tr.innerHTML = `
+	<td class="text-center">${user.id}</td>
+	<td class="text-center">${user.password}</td>
+	<td class="text-center">${user.name}</td>
+	<td class="text-center">${user.role}</td>
+	<td class="text-center">
+	<button class="btnUpd">조회</button>
+	<button class="btnDel">삭제</button>
+	</td>
+	`
+	list.append(tr);
+	}
+})
+</script>
 </body>
 </html>
