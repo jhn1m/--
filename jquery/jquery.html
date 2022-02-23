@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jquery.html</title>
+  </head>
+  <body>
+    <input type="text" id="inTxt" /><button id="btn" type="button">등록</button>
+    <div id="apple">사과</div>
+    <div data-price="5000" data-model="sam" class="active">바나나</div>
+    <div>귤</div>
+    <div class="active">배</div>
+    <div data-price="3000">키위</div>
+
+    <p>TEST</p>
+    <script>
+      // body태그에 div태그 생성후 inTxt의 내용을 삽입
+      // $()안에 감싸면 jquery 객체가 됨(jquery 기능 사용가능)
+      $("#btn").on("click", function () {
+        // $(document.body).append($("<div>").html($("#inTxt").val()))
+        var newdiv = $("<div>")
+        var txt = $("#inTxt").val()
+        newdiv.html(txt)
+
+        // 제일 위에 추가하고 싶으면 prepend를 사용하시오.
+        // 특정 값 앞에 하고싶다면 $("#apple").before(newdiv)
+        // 반대는 $("#apple").after(newdiv);
+        $(document.body).append(newdiv)
+        $("#inTxt").val("") // 버튼이 클릭되면 인풋박스 값을 지워라.
+      })
+
+      // 그룹이벤트 => 매개변수에 주의
+      // 두번째 매개변수는 실제로 적용될 타겟
+      // 새로 생성 된 값들도 삭제가 됨
+      // p를 넣으면 p태그값만 삭제가능
+      $(document.body).on("click", "div", function () {
+        console.log($(event.target).data("price"))
+        $(event.target).remove()
+      })
+      //   $(document.body).on("click", "p", function () {
+      //     $(event.target).remove()
+      //   })
+    </script>
+  </body>
+</html>
